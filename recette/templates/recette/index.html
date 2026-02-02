@@ -1,0 +1,83 @@
+{% extends 'recette/base.html' %}
+
+
+{% block titre %}Liste des recettes{% endblock %}
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Immatriculation</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Nom Chauffeur</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for recette in recettes  %}
+        
+        <tr>
+            
+            <td>{{ forloop.counter0|add:recettes.start_index }}</td>
+            <td>{{ recette.immatriculation }}</td>
+            <td>{{ recette.montant }}</td>
+            <td>{{ recette.nom_chauffeur }}</td>
+            <td>{{ recette.date_recette }}</td>
+            <td>
+                <a href="{% url 'recette:details' recette.immatriculation %}" class="btn btn-primary btn-sm">Voir Détails</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center mt-3">
+    {% if recettes.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ recettes.previous_page_number }}">Précédent</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Précédent</span>
+      </li>
+    {% endif %}
+
+    {% for numero in recettes.paginator.page_range %}
+      {% if recettes.number == numero %}
+        <li class="page-item active">
+          <span class="page-link">{{ numero }}</span>
+        </li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ numero }}">{{ numero }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if recettes.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ recettes.next_page_number }}">Suivant</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Suivant</span>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+{% extends "recette/base.html" %}
+
+{% block title %}Détails de la Recette{% endblock %}
+
+{% block content %}
+<div class="container vh-100 d-flex justify-content-center align-items-start mt-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Détails de la Recette</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Immatriculation :</strong> {{ recette.immatriculation }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Montant :</strong> {{ recette.montant }} FCFA
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Nom du Chauffeur :</strong> {{ recette.nom_chauffeur }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Date de la Recette :</strong> {{ recette.date_recette }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Date de Création :</strong> {{ recette.date_creation }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Date de Mis à Jour :</strong> {{ recette.date_mis_a_jour }}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Note :</strong> {{ recette.note|default:"Aucune note disponible" }}
+                    </li>
+                </ul>
+                <a href="{% url 'recette:index' %}" class="btn btn-secondary mt-3">Retour à la liste</a>
+                <a href="{% url 'admin:index' %}" class="btn btn-primary mt-3">Aller à l'administration</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
